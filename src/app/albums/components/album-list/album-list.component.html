@@ -1,0 +1,62 @@
+<div class="container-fluid album-list-container p-3">
+    <div class="header mb-3 d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="onCreate()">Crear Álbum</button>
+    </div>
+
+    <div class="album-cards">
+
+        <div *ngIf="loading" class="text-center w-100 h-100 d-flex justify-content-center align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50" fill="currentColor">
+                <circle cx="50" cy="50" r="45" stroke-width="10" stroke="#e0e0e0" fill="none" />
+                <circle cx="50" cy="50" r="45" stroke-width="10" stroke="#007bff" stroke-dasharray="283"
+                    stroke-dashoffset="75" fill="none" stroke-linecap="round">
+                    <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s"
+                        repeatCount="indefinite" />
+                </circle>
+            </svg>
+        </div>
+
+        <div class="table-responsive" *ngIf="!loading">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Cubierta</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de lanzamiento</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">Sello discográfico</th>
+                        <th scope="col" style="max-width: 200px;">Descripción</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr (click)="onViewDetails(album.id)" *ngFor="let album of albums | paginate: { itemsPerPage: 5, currentPage: page }">
+                        <td><img [src]="album.cover" alt="Cubierta" style="max-height: 100px; object-fit: cover;" width="50" /></td>
+                        <td>{{ album.name }}</td>
+                        <td>{{ album.releaseDate | date: 'shortDate' }}</td>
+                        <td>{{ album.genre }}</td>
+                        <td><i class="bi bi-disc-fill"></i> {{ album.recordLabel }}</td>
+                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {{ album.description }}
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-sm" (click)="onViewDetails(album.id)">Detalles</button>
+                            <button class="btn btn-warning btn-sm" (click)="onComment(album.id)">Comentar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <pagination-controls class="d-flex justify-content-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente" size="5"></pagination-controls>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    tbody tr:hover {
+        transform: scale(1.02);
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+    }
+</style>
