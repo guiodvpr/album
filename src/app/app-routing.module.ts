@@ -5,7 +5,7 @@ import { AlbumCreateComponent } from './albums/components/album-create/album-cre
 import { AlbumDetailComponent } from './albums/components/album-detail/album-detail.component';
 import { AlbumCommentComponent } from './albums/components/album-comment/album-comment.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   { path: 'albums', component: AlbumListComponent },
   { path: 'albums/create', component: AlbumCreateComponent }, // Ensure you have AlbumCreateComponent
   { path: 'albums/:id/detail', component: AlbumDetailComponent }, // Ensure you have AlbumDetailComponent
