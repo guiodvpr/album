@@ -1,6 +1,14 @@
 # Album
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+Esta aplicación es un CRUD desarrollado en Angular que permite gestionar información de **Álbumes**. Cada álbum puede tener uno o más comentarios realizados por coleccionistas. La aplicación se conecta a un backend para persistir la información en la siguiente URL:  
+`https://backvynils-q6yc.onrender.com/albums`.
+
+## Características
+
+- Crear, leer, actualizar y eliminar (CRUD) información de álbumes.
+- Relación entre álbumes y comentarios de coleccionistas.
+- Prueba unitaria para el componente `album-detail`.
+
 
 ## Development server
 
