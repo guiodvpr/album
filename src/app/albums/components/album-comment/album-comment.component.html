@@ -1,0 +1,25 @@
+<form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)" novalidate>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comentario</label>
+      <textarea id="comment" class="form-control" name="comment" [(ngModel)]="comment.text" required></textarea>
+      <div *ngIf="commentForm.submitted && commentForm.controls['comment']?.invalid" class="text-danger">
+        El comentario es obligatorio.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label class="form-label">Rating</label>
+      <div>
+        <span *ngFor="let star of stars; let i = index" (click)="setRating(i + 1)" class="star"
+          [ngClass]="{'filled': i < comment.review}">
+          &#9733;
+        </span>
+      </div>
+      <div *ngIf="commentForm.submitted && commentForm.controls['review']?.invalid" class="text-danger">
+        El rating es obligatorio y debe ser un número entre 1 y 5.
+      </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Agregar comentario</button>
+  </form>
+  

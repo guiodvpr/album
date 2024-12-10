@@ -1,0 +1,10 @@
+.star {
+    cursor: pointer;
+    font-size: 24px;
+    color: lightgray;
+  }
+  
+  .star.filled {
+    color: gold;
+  }
+  
