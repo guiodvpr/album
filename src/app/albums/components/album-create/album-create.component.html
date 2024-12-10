@@ -1,0 +1,71 @@
+<h2>Crear Álbum</h2>
+
+<div *ngIf="alertVisible" class="alert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'danger'}" role="alert">
+    {{ alertMessage }}
+  </div>
+
+<form #albumForm="ngForm" (ngSubmit)="onSubmit(albumForm); $event.preventDefault()" novalidate>
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" id="name" class="form-control" name="name" [(ngModel)]="album.name" required>
+        <div *ngIf="albumForm.submitted && albumForm.controls['name']?.invalid" class="text-danger">
+            Nombre es obligatorio.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="cover" class="form-label">Cubierta (URL)</label>
+        <input type="url" id="cover" class="form-control" name="cover" [(ngModel)]="album.cover" required>
+        <div *ngIf="albumForm.submitted && albumForm.controls['cover']?.invalid" class="text-danger">
+            Cubierta es obligatoria.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="releaseDate" class="form-label">Fecha de Lanzamiento</label>
+        <input type="date" id="releaseDate" class="form-control" name="releaseDate" [(ngModel)]="album.releaseDate"
+            required>
+        <div *ngIf="albumForm.submitted && albumForm.controls['releaseDate']?.invalid" class="text-danger">
+            Fecha de lanzamiento es obligatoria y debe ser una fecha válida.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea id="description" class="form-control" name="description" [(ngModel)]="album.description"
+            required></textarea>
+        <div *ngIf="albumForm.submitted && albumForm.controls['description']?.invalid" class="text-danger">
+            Descripción es obligatoria.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="genre" class="form-label">Género</label>
+        <select id="genre" class="form-control" name="genre" [(ngModel)]="album.genre" required>
+            <option value="" disabled selected>Seleccione un género</option>
+            <option value="Classical">Classical</option>
+            <option value="Salsa">Salsa</option>
+            <option value="Rock">Rock</option>
+            <option value="Folk">Folk</option>
+        </select>
+        <div *ngIf="albumForm.submitted && albumForm.controls['genre']?.invalid" class="text-danger">
+            Género es obligatorio.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="recordLabel" class="form-label">Disquera</label>
+        <select id="recordLabel" class="form-control" name="recordLabel" [(ngModel)]="album.recordLabel" required>
+            <option value="" disabled selected>Seleccione una disquera</option>
+            <option value="Sony Music">Sony Music</option>
+            <option value="Discos Fuentes">Discos Fuentes</option>
+            <option value="Elektra">Elektra</option>
+            <option value="Fania Records">Fania Records</option>
+        </select>
+        <div *ngIf="albumForm.submitted && albumForm.controls['recordLabel']?.invalid" class="text-danger">
+            Disquera es obligatoria.
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Álbum</button>
+</form>
