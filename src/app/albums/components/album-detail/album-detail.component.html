@@ -1,0 +1,54 @@
+<div class="album-detail-container">
+    <h2 class="mb-4 text-center">{{ album?.name }}</h2>
+
+    <div class="album-info mb-4">
+        <img [src]="album?.cover" alt="{{ album?.name }}" class="img-thumbnail" style="max-width: 200px;" />
+        <div class="album-metadata">
+            <p><strong>Fecha de Lanzamiento:</strong> {{ album?.releaseDate | date: 'shortDate' }}</p>
+            <p><strong>Descripción:</strong> {{ album?.description }}</p>
+            <p><strong>Género:</strong> {{ album?.genre }}</p>
+            <p><strong>Disquera:</strong> {{ album?.recordLabel }}</p>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h4>Comentarios</h4>
+
+        <!-- Lista de comentarios -->
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let comment of comments">
+                <div class="d-flex justify-content-between">
+                    <div class="rating-container" *ngIf="comment?.rating !== undefined">
+                        <div class="rating"
+                            [ngClass]="{ 'rating-positive': comment.rating >= 4, 'rating-negative': comment.rating < 4 }">
+                            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                                <i class="bi" 
+                                   [ngClass]="{'bi-star-fill': i < comment.rating, 'bi-star': i >= comment.rating}"></i>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                {{ comment.description }}
+            </li>
+        </ul>
+    </div>
+
+<!-- Agregar comentario -->
+<div class="add-comment mt-3">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Valoración</span>
+            <div class="star-rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                    <i class="bi" 
+                       [ngClass]="star <= newComment.rating ? 'bi-star-fill' : 'bi-star'"
+                       (click)="setRating(star)"></i>
+                </ng-container>
+            </div>
+        </div>
+        <input type="text" [(ngModel)]="newComment.description" class="form-control"
+            placeholder="Escribe un comentario..." />
+        <button class="btn btn-primary" (click)="addComment()">Agregar</button>
+    </div>
+</div>
+</div>

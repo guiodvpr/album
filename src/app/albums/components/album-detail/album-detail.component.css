@@ -1,0 +1,21 @@
+.album-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.album-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.album-metadata p {
+    margin: 0;
+}
+
+.comments-section {
+    margin-top: 2rem;
+}
+
+.list-group-item {
+    word-wrap: break-word;
+}
